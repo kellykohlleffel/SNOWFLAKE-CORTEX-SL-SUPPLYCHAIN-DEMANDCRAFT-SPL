@@ -13,6 +13,7 @@ Demonstrate how the DemandCraft prototype solution showcases the potential for c
 - Category Managers
 - Inventory Planners
 - Supply Chain Analytics Teams
+- Supply Chain Business Teams
 
 ## Demo Script
 
