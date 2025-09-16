@@ -240,6 +240,7 @@ def generate_insights_with_agent_workflow(data, focus_area, model_name, progress
         locations = len(data['location_code'].unique()) if 'location_code' in data.columns else 0
         avg_baseline_forecast = data['baseline_demand_forecast'].mean() if 'baseline_demand_forecast' in data.columns else 0
         stockout_rate = data['stockout_indicator'].mean() if 'stockout_indicator' in data.columns else 0
+        forecast_efficiency = (1 - avg_forecast_accuracy) * 100 if avg_forecast_accuracy > 0 else 0
         
         # Define enhanced agent workflows for each focus area
         if focus_area == "Overall Performance":
@@ -253,8 +254,6 @@ def generate_insights_with_agent_workflow(data, focus_area, model_name, progress
             
         elif focus_area == "Optimization Opportunities":
             promotional_coverage = data['promotional_activity_flag'].mean() if 'promotional_activity_flag' in data.columns else 0
-            forecast_efficiency = (1 - avg_forecast_accuracy) * 100 if avg_forecast_accuracy > 0 else 0
-            
             steps = [
                 ("Demand Planning Optimization Data Preparation", 12, f"Advanced loading of demand forecasting data with enhanced validation across {total_records} records for forecasting improvement identification", f"Prepared {product_skus} product SKUs, {locations} locations for optimization analysis with {promotional_coverage:.1%} promotional coverage rate"),
                 ("Forecast Accuracy Inefficiency Detection", 28, f"Sophisticated analysis of demand planning strategies and inventory performance with evidence-based inefficiency identification", f"Identified optimization opportunities across {product_skus} product categories with demand forecasting and inventory management gaps"),
